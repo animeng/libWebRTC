@@ -5,10 +5,9 @@
 # Any lines starting with a # are optional, but their use is encouraged
 # To learn more about a Podspec see http://guides.cocoapods.org/syntax/podspec.html
 #
-
 Pod::Spec.new do |s|
   s.name             = 'libWebRTC'
-  s.version          = '1.0'
+  s.version          = '1.0.1'
   s.summary          = 'static library of webrtc.'
 
 # This description is used to generate tags and improve search results.
@@ -22,17 +21,17 @@ webrtc(google opensource) is p2p video chat framework
                        DESC
 
   s.homepage         = 'https://github.com/animeng/libWebRTC'
-  s.license          = { :type => 'MIT', :file => 'LICENSE' }
+  s.license          = 'MIT'
   s.author           = { 'wang animeng' => 'animeng68@gmail.com' }
-  s.source           = { :git => 'https://github.com/animeng/libWebRTC.git', :tag => '1.0' }
+  s.source           = { :git => 'https://github.com/animeng/libWebRTC.git', :tag => '1.0.1' }
   s.social_media_url = 'http://weibo.com/mengtnt'
+  s.platform     = :ios, "8.0"
 
-  s.ios.deployment_target = '8.0'
-
-  s.source_files = 'Pod/public/*'
-
-  s.ios.vendored_library   = 'Pod/libWebRTC.a'
+  s.source_files = "Pod/WebRTC.framework/Headers"
+  s.vendored_frameworks = "Pod/WebRTC.framework"
   s.library = 'icucore','c++','stdc++.6','sqlite3'
   s.frameworks = 'UIKit','Security','CFNetwork','GLKit','AudioToolbox','AVFoundation','CoreAudio','CoreMedia','CoreVideo','CoreGraphics','OpenGLES','QuartzCore'
   s.module_name = 'libWebRTC'
+
+  s.requires_arc     = true
 end
