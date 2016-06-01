@@ -27,12 +27,33 @@ webrtc(google opensource) is p2p video chat framework
   s.social_media_url = 'http://weibo.com/mengtnt'
   s.platform     = :ios, "8.0"
 
-  s.xcconfig = { 'FRAMEWORK_SEARCH_PATHS' => '"${PODS_ROOT}"' }
-  s.source_files = "Pod/WebRTC.framework/Headers"
-  s.vendored_frameworks = "Pod/WebRTC.framework"
+  s.xcconfig = { 
+    'HEADER_SEARCH_PATHS' => '"${PODS_ROOT}/Pod/**"', 
+    'GCC_PREPROCESSOR_DEFINITIONS' => "WEBRTC_POSIX LOGGING=1 FEATURE_ENABLE_SSL SYSTEM_NATIVELY_SIGNALS_MEMORY_PRESSURE IOS WEBRTC_IOS CARBON_DEPRECATED=YES USE_OPENSSL=1 NDEBUG NVALGRIND",
+    'OTHER_LDFLAGS' => '-ObjC'
+  }
+  s.source_files = [
+    "Pod/webrtc/video_frame.h", 
+    "Pod/webrtc/typedefs.h",
+    "Pod/webrtc/common_types.h",
+    "Pod/webrtc/base/*.h", 
+    "Pod/webrtc/media/base/*.h",
+    "Pod/webrtc/media/engine/*.h",
+    "Pod/webrtc/common_video/include/*.h",
+    "Pod/webrtc/common_video/*.h",
+    "Pod/webrtc/system_wrappers/include/*.h",
+    "Pod/webrtc/modules/audio_device/ios/objc/RTCAudioSession.h",
+    "Pod/webrtc/modules/audio_device/ios/objc/RTCAudioSessionConfiguration.h",
+    ]
+  s.vendored_frameworks = "Pod/lib/WebRTC.framework"
+  s.public_header_files = [
+    "Pod/lib/WebRTC.framework/Headers/**/*.h", 
+    "Pod/webrtc/modules/audio_device/ios/objc/RTCAudioSession.h",
+    "Pod/webrtc/modules/audio_device/ios/objc/RTCAudioSessionConfiguration.h"
+  ]
   s.library = 'icucore','c++','stdc++.6','sqlite3'
   s.frameworks = 'UIKit','Security','CFNetwork','GLKit','AudioToolbox','AVFoundation','CoreAudio','CoreMedia','CoreVideo','CoreGraphics','OpenGLES','QuartzCore'
-  s.module_name = 'libWebRTC'
-
+  s.module_name = 'WebRTC'
+  s.module_map = "Pod/lib/WebRTC.framework/Modules/module.modulemap"
   s.requires_arc     = true
 end
